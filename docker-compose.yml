@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  polkadot:
+    container_name: polkadot
+    image: parity/polkadot
+    ports:
+      - 30333:30333 # p2p port
+      - 9933:9933 # rpc port
+      - 9944:9944 # ws port
+   
+      
+    command: [
+      "--name", "PolkaDocker",
+      "--ws-external",
+      "--rpc-external",
+      "--sync", "Full",
+      "--rpc-cors", "all"
+     ]
+    networks:
+      localnet:
+        ipv4_address: 180.160.10.1
+
+  nodeserver:
+       build:
+         context: ./
+       ports:
+         - 8080:8080
+       working_dir: /polkadot-explorer
+       networks:
+           localnet:
+             ipv4_address: 180.160.10.2
+
+networks:
+  localnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -
+       subnet: 180.160.10.0/16
+
