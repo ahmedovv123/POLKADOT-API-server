@@ -138,3 +138,43 @@ exports.getTransactionsFromBlockByHash = async (req, res) => {
     })
 }
 
+exports.getUnconfirmedTransactionOfAddressAfterN = (req, res) => {
+    const address = req.body.address
+
+    connect.then(api => {
+        
+        api.rpc.author.pendingExtrinsics()
+        .then(data => {
+            res.send(data);
+           
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occured"
+            });
+        });
+    })
+
+};
+
+
+exports.getAddressInformation = (req, res) => {
+    const address = req.params.address
+   
+    connect.then(api => {
+
+        api.query.system.account(address)
+        .then(data => {
+	res.send(data)
+            
+
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occured"
+            });
+        });
+    })
+
+};
+

@@ -10,7 +10,7 @@ const getNodeConnection = async () => {
         return api;
     }
 
-    const provider = new WsProvider('ws://127.0.0.1:9944');
+    const provider = new WsProvider('ws://180.160.10.1:9944');
 
     api = await ApiPromise.create({ provider });
    
