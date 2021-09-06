@@ -14,7 +14,7 @@ module.exports = app => {
     router.post("/blocks/hash", node.getBlockByHash);
 
     // Get transactions from block by hash
-    router.post("/blocks/transactions/hash", node.getTransactionsFromBlockByHash);
+    //router.post("/blocks/transactions/hash", node.getTransactionsFromBlockByHash);
 
     
     // Get X unconfirmed transactions after N-th transaction from new to old 
@@ -23,8 +23,8 @@ module.exports = app => {
     // Get transaction details by hash
     // router.get("/transactions/hash/", node.getTransactionByHash);
 
-    // // Get details of addresses
-    // router.post("/addresses/:adr", node.getAddress);
+    // Get details of addresses
+     router.get("/addresses/:adr", node.getAddress);
 
     // //Get X transactions from address after N-th transaction from new to old
     // TODO:
