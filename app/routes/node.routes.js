@@ -19,12 +19,12 @@ module.exports = app => {
     router.get("/address/balance/:adr", node.getAddressBalance);
 
     // Get transactions from block
-    router.post("transactions/block", node.getBlockTransactions);
+    router.post("/transactions/block", node.getBlockTransactions);
 
     // Get Transaction details by hash
-    router.post("transactions/hash", node.getTransactionByHash);
+    router.post("/transactions/hash", node.getTransactionByHash);
 
-    // Get lsat sync block
+    // Get last sync block
     router.get("/blocks", node.getBlock);
 
     app.use('/api/node', router);

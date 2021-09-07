@@ -1,6 +1,7 @@
 const dbConnection = require("../../dbConnection");
 
 const connectDb = dbConnection.getDbConnection().then((db) => {
+    db.connect().then(console.log("Connected to PostgreSQL from Server"));
     return db;
 });
 
@@ -11,8 +12,6 @@ exports.getAddressTransactions = (req, res) => {
     
     connectDb.then(db => {
         
-        db.connect().then(console.log("Connected to PostgreSQL from Server"));
-
         db.query(`SELECT * FROM transactions WHERE recipient='${address}' OR sender='${address}'`,
         (err, result) => {
             if(!err){ 
@@ -30,7 +29,7 @@ exports.getBlockTransactions = (req, res) => {
     
     connectDb.then(db => {
         
-        db.connect().then(console.log("Connected to PostgreSQL from Server"));
+       
 
         db.query(`SELECT * FROM transactions WHERE block_hash='${block}'`,
         (err, result) => {
@@ -48,7 +47,7 @@ exports.getTransactionByHash = (req, res) => {
     
     connectDb.then(db => {
         
-        db.connect().then(console.log("Connected to PostgreSQL from Server"));
+        
 
         db.query(`SELECT * FROM transactions WHERE hash='${transactionHash}'`,
         (err, result) => {
