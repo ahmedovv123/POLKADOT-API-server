@@ -13,7 +13,7 @@ exports.getBlockByNumber = (req, res) => {
 
 // Get block by hash
 exports.getBlockByHash = (req, res) => {
-  rpcService.getBlockByHash(res,req);
+  rpcService.getBlockByHash(req,res);
 };
 // Get X block after N-th, new to old
 exports.getXblocksAfterN = (req, res) => {
