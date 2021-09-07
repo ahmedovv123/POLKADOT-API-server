@@ -35,4 +35,8 @@ exports.getBlockTransactions = (req, res) => {
   dbService.getBlockTransactions(req, res);
 };
 
+exports.getTransactionByHash = (req, res) => {
+  dbService.getTransactionByHash(req, res);
+}
+
 

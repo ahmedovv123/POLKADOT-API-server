@@ -41,3 +41,21 @@ exports.getBlockTransactions = (req, res) => {
         })
     })
 }
+
+exports.getTransactionByHash = (req, res) => {
+
+    const transactionHash = req.body.transactionHash;
+    
+    connectDb.then(db => {
+        
+        db.connect().then(console.log("Connected to PostgreSQL from Server"));
+
+        db.query(`SELECT * FROM transactions WHERE hash='${transactionHash}'`,
+        (err, result) => {
+            if(!err){ 
+                res.send(result.rows);
+            }
+            
+        })
+    })
+}

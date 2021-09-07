@@ -21,6 +21,9 @@ module.exports = app => {
     // Get transactions from block
     router.post("transactions/block", node.getBlockTransactions);
 
+    // Get Transaction details by hash
+    router.post("transactions/hash", node.getTransactionByHash);
+
     // Get lsat sync block
     router.get("/blocks", node.getBlock);
 
