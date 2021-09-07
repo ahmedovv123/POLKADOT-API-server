@@ -26,8 +26,7 @@ services:
       "--rpc-cors", "all",
       "--ws-external",
       "--rpc-external",
-      "--pruning","archive",
-      "--wasm-execution", "Compiled"
+      "--pruning","archive"
     
     ]
   db-PostgreSQL:

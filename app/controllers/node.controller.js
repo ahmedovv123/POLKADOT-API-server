@@ -20,9 +20,19 @@ exports.getXblocksAfterN = (req, res) => {
   rpcService.getXBlocksAfterN(req,res);
 };
 
-exports.getAddress = (req, res) => {
-  //TODO: get balance and transactions of address
+// Get Address balance
+exports.getAddressBalance = (req, res) => {
+  rpcService.getAddressBalance(req, res);
 };
 
+// Get Address transactions
+exports.getAddressTransactions = (req, res) => {
+  dbService.getAddressTransactions(req, res);
+};
+
+// Get block transactions
+exports.getBlockTransactions = (req, res) => {
+  dbService.getBlockTransactions(req, res);
+};
 
 

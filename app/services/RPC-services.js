@@ -83,6 +83,18 @@ exports.getXBlocksAfterN = (req,res) => {
     });
 }
 
-exports.getAddressBalance = async address => {
-  //TODO: get balance of address by address id 
+exports.getAddressBalance = (req,res) => {
+  const address = req.params.adr
+  connectApi.then(api => {
+
+    api.query.system.account(address)
+      .then(data => {
+      res.send(data.toHuman())
+      })
+      .catch(err => {
+          res.status(500).send({
+              message: err.message || "Some error occured"
+          });
+      });
+  })
 }

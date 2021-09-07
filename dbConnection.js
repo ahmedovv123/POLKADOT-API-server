@@ -14,7 +14,7 @@ const getDbConnection = async () => {
         database: "polkadot_explorer",
     });
 
-    console.log("Creating connection to DB from NodeJS server");
+    
     return newClient;
 
 }
