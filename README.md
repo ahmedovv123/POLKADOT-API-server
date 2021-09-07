@@ -12,7 +12,7 @@ npm install
 # run
 npm run server
 ```
-## Setup with Docker
+## Setup with Docker (Recommended)
 ``` bash
 # clone repo
 git clone https://github.com/ahmedovv123/polkadot-explorer.git
