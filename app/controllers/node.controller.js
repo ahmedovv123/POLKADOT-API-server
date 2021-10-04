@@ -1,140 +1,68 @@
+const rpcService = require("../services/RPC-services");
+const dbService = require("../services/DB-services");
 
-const api = require('../../nodeConnection');
-
-
-const connect = api.getNodeConnection().then(api => {
-    return api;
-});
-
-
-// Get last synchronised block 
-exports.getBlock =  (req, res) => {
-    
-    connect.then(api => {
-
-        
-        api.rpc.chain.getBlock()
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occured"
-            });
-        });
-    })
+// Get last synchronised block
+exports.getBlock = (req, res) => {
+  rpcService.getLastBlock(req,res);
 };
-
 
 // Get hash of block by Number
 exports.getBlockByNumber = (req, res) => {
-    const number = req.params.num
-
-    connect.then(api => {
-        
-        api.rpc.chain.getBlockHash(number)
-        .then(data => {
-            res.send(data);
-           
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occured"
-            });
-        });
-    })
-
+  rpcService.getBlockHashByNumber(req,res);
 };
 
-// Get Block block by hash
-
+// Get block by hash
 exports.getBlockByHash = (req, res) => {
-    const hash = req.body.hash
-
-    connect.then(api => {
-        
-        api.rpc.chain.getBlock(hash)
-        .then(data => {
-            
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occured"
-            });
-        });
-    })
- 
-
+  rpcService.getBlockByHash(req,res);
+};
+// Get X block after N-th, new to old
+exports.getXblocksAfterN = (req, res) => {
+  rpcService.getXBlocksAfterN(req,res);
 };
 
+// Get Address balance
+exports.getAddressBalance = (req, res) => {
+  rpcService.getAddressBalance(req, res);
+};
 
-exports.getXblocksAfterN = (req, res) => {
+// Get Address transactions
+exports.getAddressTransactions = (req, res) => {
+  dbService.getAddressTransactions(req, res);
+};
 
-    connect.then(api => {
+// Get block transactions
+exports.getBlockTransactions = (req, res) => {
+  dbService.getBlockTransactions(req, res);
+};
 
-        const X = parseInt(req.params.x);
-        const N = req.params.n;
-        let i = 1;
-        let blocks = [];
-        let completed = 0;
+exports.getTransactionByHash = (req, res) => {
+  dbService.getTransactionByHash(req, res);
+}
 
-        while (i <= X) {
-            
-            api.rpc.chain.getBlockHash(N-i)
-            .then(data => {
-                completed++;
-                blocks.push(data)
-                if(completed == X) {
-                    res.send(blocks);
-                }
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: err.message || "Some error occured"
-                });
-            });
-
-            i++;
-        }
-    })
-    
- 
+// Get Last X transactions
+exports.getXTransactionsAfterNth = (req, res) => {
+  dbService.getXTransactionsAfterNth(req, res);
 }
 
 
-exports.getTransactionsFromBlockByHash = async (req, res) => {
-    const hash = req.body.hash
+// Get transactions count
 
-    connect.then(api =>  {
-        
-        async function getBlock() {
-            // no blockHash is specified, so we retrieve the latest
-            const signedBlock = await api.rpc.chain.getBlock();
-            var blocks = [];
-            // the information for each of the contained extrinsics
-            signedBlock.block.extrinsics.forEach((ex, index) => {
-            // the extrinsics are decoded by the API, human-like view
-            
-
-             const { isSigned } = ex;
-            
-                if(isSigned){
-                    
-
-                    blocks.push(ex.toHuman());
-                    console.log(index, ex.toHuman());
-
-                }
-
-
-            });   
-            res.send(blocks);            
-        }
-        
-        getBlock();
-        
-
-    })
+exports.getTransactionsCount = (req, res) => {
+  dbService.getTransactionsCount(req, res);
 }
+
+// Get transaction count of address
+exports.getAddressTransactionsCount = (req, res) => {
+  dbService.getAddressTransactionsCount(req, res);
+}
+
+// Get accounts count
+exports.getAccountsCount = (req, res) => {
+  dbService.getAccountsCount(req, res)
+}
+
+exports.getXTransactionsAfterNthFromAcc = (req, res) => {
+  dbService.getXTransactionsAfterNthFromAcc(req,res)
+}
+
 

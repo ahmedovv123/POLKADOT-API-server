@@ -4,16 +4,12 @@ let api;
 
 const getNodeConnection = async () => {
 
-    if(api) 
-    {
-        console.log("Using existing connection");
-        return api;
-    }
-
-    const provider = new WsProvider('ws://127.0.0.1:9944');
+    if(api) return api;
+  
+    const provider = new WsProvider('ws://polkadot-node-container:9944');
 
     api = await ApiPromise.create({ provider });
-   
+    
     console.log("Creating new connection to node");
     return api;
 
