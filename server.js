@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // simple route for
 app.get("/", (req,res) => {
-    res.json({message: "Welcome"});
+    res.json({message: "Welcome to server"});
 });
 
 require("./app/routes/node.routes")(app);
