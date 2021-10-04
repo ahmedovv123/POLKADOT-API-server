@@ -9,6 +9,7 @@ services:
     depends_on:
       db-PostgreSQL:
         condition: service_healthy
+    
 
   polkadot-node: 
     image: parity/polkadot
@@ -27,8 +28,8 @@ services:
       "--ws-external",
       "--rpc-external",
       "--pruning","archive"
-    
     ]
+    
   db-PostgreSQL:
     image: postgres:12-alpine
     container_name: postgreSql-container
@@ -36,6 +37,8 @@ services:
       - POSTGRES_DB=polkadot_explorer
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=root
+    volumes: 
+      -/home/Polkadot/dbData
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
