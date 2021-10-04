@@ -39,4 +39,30 @@ exports.getTransactionByHash = (req, res) => {
   dbService.getTransactionByHash(req, res);
 }
 
+// Get Last X transactions
+exports.getXTransactionsAfterNth = (req, res) => {
+  dbService.getXTransactionsAfterNth(req, res);
+}
+
+
+// Get transactions count
+
+exports.getTransactionsCount = (req, res) => {
+  dbService.getTransactionsCount(req, res);
+}
+
+// Get transaction count of address
+exports.getAddressTransactionsCount = (req, res) => {
+  dbService.getAddressTransactionsCount(req, res);
+}
+
+// Get accounts count
+exports.getAccountsCount = (req, res) => {
+  dbService.getAccountsCount(req, res)
+}
+
+exports.getXTransactionsAfterNthFromAcc = (req, res) => {
+  dbService.getXTransactionsAfterNthFromAcc(req,res)
+}
+
 

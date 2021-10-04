@@ -44,7 +44,7 @@ exports.getBlockByHash = (req, res) => {
       api.rpc.chain
         .getBlock(hash)
         .then((data) => {
-          res.send(data);
+          res.send(data.toHuman());
         })
         .catch((err) => {
           res.status(500).send({
