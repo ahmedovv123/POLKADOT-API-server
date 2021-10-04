@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ ahmet ]
+    branches: [ main ]
 
 jobs:
   build:
