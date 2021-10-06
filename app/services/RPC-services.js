@@ -83,6 +83,8 @@ exports.getXBlocksAfterN = (req,res) => {
     });
 }
 
+
+
 exports.getAddressBalance = (req,res) => {
   const address = req.params.adr
   connectApi.then(api => {
