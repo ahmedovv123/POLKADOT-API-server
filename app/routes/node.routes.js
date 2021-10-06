@@ -67,6 +67,9 @@ module.exports = app => {
 *   BlockByHash:
 *    type: string
 *    example: '0xd518e818b934ac452d481bd4e60460af1abab77ab899967eb1b46fe7db86503c'
+*   XTransactionsFromNth:
+*    type: string
+*    example: '12xtAYsRUrmbniiWQqJtECiBQrMn8AypQcXhnQAc6RB6XkLW'
 */ 
 
 /**
@@ -92,7 +95,7 @@ module.exports = app => {
  *    200:
  *     description: Last block
  *    500:
- *     description: failure fetching lsat block
+ *     description: failure fetching last block
  */
 
     // Get last sync block
@@ -184,12 +187,77 @@ module.exports = app => {
     ///////////////////////// ACCOUNTS ////////////////////////////////
 
     //Get accounts count
+
+/** 
+ * @swagger
+ * /accounts/count/:
+ *  get:
+ *   summary: get account count
+ *   tags:
+ *    - Accounts
+ *   description: get account count from db
+ *   responses:
+ *    200:
+ *     description: Accounts count
+ *    500:
+ *     description: failure fetching accounts count
+ */
     router.get('/accounts/count', node.getAccountsCount);
 
-    // Get adress transactions count 
+
+    //Get address transactions count 
+
+/** 
+ * @swagger
+ * /address/transactions/count/{adr}:
+ *  get:
+ *   summary: get address transactions count
+ *   tags:
+ *    - Accounts
+ *   description: get address transactions count from db
+ *   parameters:
+ *    - in: path
+ *      name: adr
+ *      schema:
+ *       type: string
+ *      required: true 
+ *      description: id of account
+ *      example: '1743nDTMZisPgBCYSAgkUn1kVG7MePc9rvMEjoRNf4ipVkF'
+ *   responses:
+ *    200:
+ *     description: Transactions count
+ *    500:
+ *     description: Failure fetching transactions count
+ */
     router.get("/address/transactions/count/:adr", node.getAddressTransactionsCount);
 
+
+
     // Get address transactions
+
+    /** 
+ * @swagger
+ * /address/transactions/{adr}:
+ *  get:
+ *   summary: get address transactions
+ *   tags:
+ *    - Accounts
+ *   description: get address transactions from db
+ *   parameters:
+ *    - in: path
+ *      name: adr
+ *      schema:
+ *       type: string
+ *      required: true 
+ *      description: id of account
+ *      example: '1743nDTMZisPgBCYSAgkUn1kVG7MePc9rvMEjoRNf4ipVkF'
+ *   responses:
+ *    200:
+ *     description: Transactions
+ *    500:
+ *     description: Failure fetching transactions
+ */
+
     router.get("/address/transactions/:adr", node.getAddressTransactions);
 
     // Get address balance
@@ -200,7 +268,7 @@ module.exports = app => {
  *  get:
  *   summary: get address balance
  *   tags:
- *    - transactions
+ *    - Accounts
  *   description: get balance of an address from node
  *   parameters:
  *    - in: path
@@ -222,25 +290,148 @@ module.exports = app => {
 
     // Get X transactions after Nth of account
 
+/** 
+ * @swagger
+ * /address/transactions/{x}/{n}:
+ *  post:
+ *   summary: get address X transactions from Nth
+ *   tags:
+ *    - Accounts
+ *   description: get address X transactions from Nth
+ *   parameters:
+ *    - in: path
+ *      name: n
+ *      schema:
+ *       type: integer
+ *      required: true 
+ *      description: account nth transaction
+ *      example: 10
+ *    - in: path
+ *      name: x
+ *      schema:
+ *       type: integer
+ *      required: true 
+ *      description: transaction count
+ *      example: 5
+ *   requestBody:
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: string
+ *       required: true
+ *       example: '12xtAYsRUrmbniiWQqJtECiBQrMn8AypQcXhnQAc6RB6XkLW'
+ *   responses:
+ *    200:
+ *     description: Transactions
+ *    500:
+ *     description: Failure fetching transactions
+ */
+
     router.post('/address/transactions/:x/:n', node.getXTransactionsAfterNthFromAcc)
+
+
+
 
     ///////////////////////  TRANSACTIONS ///////////////////////////
 
     // Get count of transactions
+
+/** 
+ * @swagger
+ * /transactions/count/:
+ *  get:
+ *   summary: get all transactions count
+ *   tags:
+ *    - Transactions
+ *   description: get all transactions count
+ *   responses:
+ *    200:
+ *     description: Transactions count
+ *    500:
+ *     description: failure fetching Transactions count
+ */
     router.get('/transactions/count', node.getTransactionsCount);
 
     // Get transactions from block
+
+/**
+  * @swagger
+  * /transactions/block:
+  *  post:
+  *   summary: Get block transactions
+  *   tags:
+  *    - Transactions
+  *   description: Get block transactions
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       type: string
+  *       example: '0x527dbeb44ff53d4a805d72e1350ad76fd6e86116a1ba34c6d058f752bcc5db36'
+  *   responses:
+  *    200:
+  *     description: Block transactions
+  *    500:
+  *     description: failure fetching block transactions
+  */  
     router.post("/transactions/block", node.getBlockTransactions);
 
     // Get Transaction details by hash
+
+/**
+  * @swagger
+  * /transactions/hash:
+  *  post:
+  *   summary: Get transaction by hash
+  *   tags:
+  *    - Transactions
+  *   description: Get transaction by hash
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       type: string
+  *       example: '0x2261184f6bd42eb775f2a55477ce65e7d710a535a8c9da98441908bc2ba87170'
+  *   responses:
+  *    200:
+  *     description: Transaction
+  *    500:
+  *     description: failure fetching transaction
+  */ 
     router.post("/transactions/hash", node.getTransactionByHash);
 
     // Get last X transactions after Nth
+
+/** 
+ * @swagger
+ * /transactions/:x/:n:
+ *  get:
+ *   summary: Get X transactions after Nth from new to old
+ *   tags:
+ *    - Transactions
+ *   description: Get X transactions after Nth from new to old
+ *   parameters:
+ *    - in: path
+ *      name: x
+ *      schema:
+ *       type: integer
+ *      required: true 
+ *      example: 10
+ *    - in: path 
+ *      name: n
+ *      schema:    
+ *       type: integer
+ *      required: true
+ *      description: transaction index from db
+ *      example: 100
+ *   responses:
+ *    200:
+ *     description: x transactions
+ *    500:
+ *     description: failure fetching transactions
+ */
     router.get('/transactions/:x/:n', node.getXTransactionsAfterNth)
 
-    
-
-   
 
     app.use('/api/node', router);
 
