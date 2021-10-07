@@ -85,7 +85,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /blocks:
+ * /api/node/blocks:
  *  get:
  *   summary: get address balance
  *   tags:
@@ -103,7 +103,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /blocks/num/{num}:
+ * /api/node/blocks/num/{num}:
  *  get:
  *   summary: get block by number
  *   tags:
@@ -129,7 +129,7 @@ module.exports = app => {
 
   /**
   * @swagger
-  * /blocks/hash:
+  * /api/node/blocks/hash:
   *  post:
   *   summary: Get block by hash
   *   tags:
@@ -152,7 +152,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /blocks/{x}/{n}:
+ * /api/node/blocks/{x}/{n}:
  *  get:
  *   summary: Get X blocks after N-th block from new to old
  *   tags:
@@ -190,7 +190,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /accounts/count/:
+ * /api/node/accounts/count/:
  *  get:
  *   summary: get account count
  *   tags:
@@ -209,7 +209,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /address/transactions/count/{adr}:
+ * /api/node/address/transactions/count/{adr}:
  *  get:
  *   summary: get address transactions count
  *   tags:
@@ -237,7 +237,7 @@ module.exports = app => {
 
     /** 
  * @swagger
- * /address/transactions/{adr}:
+ * /api/node/address/transactions/{adr}:
  *  get:
  *   summary: get address transactions
  *   tags:
@@ -264,7 +264,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /address/balance/{adr}:
+ * /api/node/address/balance/{adr}:
  *  get:
  *   summary: get address balance
  *   tags:
@@ -292,7 +292,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /address/transactions/{x}/{n}:
+ * /api/node/address/transactions/{x}/{n}:
  *  post:
  *   summary: get address X transactions from Nth
  *   tags:
@@ -338,7 +338,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /transactions/count/:
+ * /api/node/transactions/count/:
  *  get:
  *   summary: get all transactions count
  *   tags:
@@ -356,7 +356,7 @@ module.exports = app => {
 
 /**
   * @swagger
-  * /transactions/block:
+  * /api/node/transactions/block:
   *  post:
   *   summary: Get block transactions
   *   tags:
@@ -380,7 +380,7 @@ module.exports = app => {
 
 /**
   * @swagger
-  * /transactions/hash:
+  * /api/node/transactions/hash:
   *  post:
   *   summary: Get transaction by hash
   *   tags:
@@ -404,7 +404,7 @@ module.exports = app => {
 
 /** 
  * @swagger
- * /transactions/:x/:n:
+ * /api/node/transactions/:x/:n:
  *  get:
  *   summary: Get X transactions after Nth from new to old
  *   tags:
