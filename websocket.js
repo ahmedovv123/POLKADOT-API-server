@@ -28,10 +28,17 @@ wsServer.on('request', function (request) {
     
 
     connection.on('message', function (message) {
+        let msg;
+        try {
+            msg = JSON.parse(message.utf8Data);
+        } catch (error) {
+            client.send('Parse error')
+            return;
+        }
         if(message.type  === 'utf8') {
             
-            switch(message.utf8Data) {
-                case 'lastBlock':
+            switch(msg.method) {
+                case 'rpc_getLastBlock':
                     connectApi.then( async (api) => {
                        client.send(await api.rpc.chain.getBlock())
                     });
