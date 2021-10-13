@@ -10,7 +10,7 @@
   "author": "Ahmet-Ivelin",
   "license": "ISC",
   "dependencies": {
-    "@polkadot/api": "^5.6.1",
+    "@polkadot/api": "^6.3.1",
     "axios": "^0.22.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -19,6 +19,7 @@
     "jest-openapi": "^0.14.0",
     "path": "^0.12.7",
     "pg": "^8.7.1",
+    "query-string": "^7.0.1",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6",
     "websocket": "^1.0.34"
